@@ -29,7 +29,7 @@ public class Leg implements Serializable {
     private String departure;
 
     @SerializedName("Arrival")
-    private int arrival;
+    private String arrival;
 
     @SerializedName("Duration")
     private int duration;

@@ -21,6 +21,4 @@ public class PricingOption implements Serializable {
     @SerializedName("Price")
     private Double price;
 
-    @SerializedName("DeeplinkUrl")
-    private String deeplinkUrl;
 }

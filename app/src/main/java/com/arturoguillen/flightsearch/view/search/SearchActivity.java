@@ -5,18 +5,14 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.arturoguillen.flightsearch.di.component.FlightComponent;
-import com.arturoguillen.flightsearch.entities.client.Flight;
+import com.arturoguillen.flightsearch.entities.client.FlightsResult;
 import com.arturoguillen.flightsearch.entities.client.Search;
-import com.arturoguillen.flightsearch.entities.server.Session;
 import com.arturoguillen.flightsearch.model.SearchModel;
 import com.arturoguillen.flightsearch.view.InjectedActivity;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableObserver;
-import retrofit2.Response;
 
 /**
  * Created by arturo.guillen on 28/08/2017.
@@ -40,15 +36,15 @@ public class SearchActivity extends InjectedActivity {
         search.setChildren(0);
         search.setInfants(0);
 
-        searchModel.getFlightsInfo(search, new DisposableObserver<List<Flight>>() {
+        searchModel.getFlightsInfo(search, new DisposableObserver<FlightsResult>() {
             @Override
-            public void onNext(List<Flight> value) {
-
+            public void onNext(FlightsResult flightsResult) {
+                Log.i("MIERDA", flightsResult.getFligths().toString());
             }
 
             @Override
             public void onError(Throwable e) {
-e.printStackTrace();
+                e.printStackTrace();
             }
 
             @Override
