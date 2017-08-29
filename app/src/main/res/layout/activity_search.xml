@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_low"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/sp_origin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med" />
+
+    <Spinner
+        android:id="@+id/sp_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med" />
+
+    <EditText
+        android:id="@+id/et_outbound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med"
+        android:clickable="true" />
+
+    <EditText
+        android:id="@+id/et_inbound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med"
+        android:clickable="true" />
+
+    <EditText
+        android:id="@+id/et_adults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/et_children"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/et_infants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_med"
+        android:layout_marginTop="@dimen/margin_med"
+        android:text="@string/search" />
+</LinearLayout>
