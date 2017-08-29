@@ -1,7 +1,5 @@
 package com.arturoguillen.flightsearch.entities.client;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,28 +11,20 @@ public class FlightsResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @SerializedName("originPlaceId")
     private int originPlaceId;
 
-    @SerializedName("originPlace")
     private String originPlace;
 
-    @SerializedName("destinationPlaceId")
     private int destinationPlaceId;
 
-    @SerializedName("destinationPlace")
     private String destinationPlace;
 
-    @SerializedName("fligths")
-    private List<Flight> fligths;
+    private List<Trip> trips;
 
-    @SerializedName("outboundDate")
     private String outboundDate;
 
-    @SerializedName("inboundDate")
     private String inboundDate;
 
-    @SerializedName("numberOfResults")
     private int numberOfResults;
 
     public void setOriginPlaceId(int originPlaceId) {
@@ -61,14 +51,9 @@ public class FlightsResult implements Serializable {
         this.inboundDate = inboundDate;
     }
 
-    public List<Flight> getFligths() {
-        return fligths;
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
-
-    public void setFligths(List<Flight> fligths) {
-        this.fligths = fligths;
-    }
-
 
     public void setNumberOfResults(int numberOfResults) {
         this.numberOfResults = numberOfResults;

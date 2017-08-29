@@ -2,22 +2,14 @@ package com.arturoguillen.flightsearch.entities.server;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * Created by arturo.guillen on 28/08/2017.
  */
 
-public class Leg implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Leg {
 
     @SerializedName("Id")
     private String id;
-
-    @SerializedName("SegmentIds")
-    private int[] segmentsIds;
 
     @SerializedName("OriginStation")
     private int originStation;
@@ -34,21 +26,41 @@ public class Leg implements Serializable {
     @SerializedName("Duration")
     private int duration;
 
-    @SerializedName("JourneyMode")
-    private String journeyMode;
-
     @SerializedName("Stops")
     private int[] stops;
 
     @SerializedName("Carriers")
     private int[] carriers;
 
-    @SerializedName("OperatingCarriers")
-    private int[] operatingCarriers;
+    public String getId() {
+        return id;
+    }
 
-    @SerializedName("Directionality")
-    private String directionality;
+    public int getOriginStation() {
+        return originStation;
+    }
 
-    @SerializedName("FlightNumbers")
-    private List<FlightNumber> flightNumbers;
+    public int getDestinationStation() {
+        return destinationStation;
+    }
+
+    public String getDeparture() {
+        return departure;
+    }
+
+    public String getArrival() {
+        return arrival;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int[] getStops() {
+        return stops;
+    }
+
+    public int[] getCarriers() {
+        return carriers;
+    }
 }

@@ -2,16 +2,13 @@ package com.arturoguillen.flightsearch.entities.server;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by arturo.guillen on 28/08/2017.
  */
 
-public class Session implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Session {
 
     @SerializedName("Query")
     private Query query;
@@ -25,6 +22,9 @@ public class Session implements Serializable {
     @SerializedName("Places")
     private List<Place> places;
 
+    @SerializedName("Carriers")
+    private List<Carrier> carriers;
+
 
     public List<Itinerary> getItineraries() {
         return itineraries;
@@ -36,5 +36,13 @@ public class Session implements Serializable {
 
     public Query getQuery() {
         return query;
+    }
+
+    public List<Leg> getLegs() {
+        return legs;
+    }
+
+    public List<Carrier> getCarriers() {
+        return carriers;
     }
 }

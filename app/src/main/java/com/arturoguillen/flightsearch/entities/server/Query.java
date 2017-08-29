@@ -2,15 +2,11 @@ package com.arturoguillen.flightsearch.entities.server;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 /**
  * Created by agl on 28/08/2017.
  */
 
-public class Query implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Query {
 
     @SerializedName("OriginPlace")
     private int originPlace;

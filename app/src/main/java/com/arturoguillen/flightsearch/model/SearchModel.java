@@ -3,11 +3,14 @@ package com.arturoguillen.flightsearch.model;
 import android.support.annotation.Nullable;
 
 import com.arturoguillen.flightsearch.di.api.SessionApi;
-import com.arturoguillen.flightsearch.entities.client.Flight;
 import com.arturoguillen.flightsearch.entities.client.FlightsResult;
 import com.arturoguillen.flightsearch.entities.client.Search;
+import com.arturoguillen.flightsearch.entities.client.Trip;
+import com.arturoguillen.flightsearch.entities.server.Carrier;
 import com.arturoguillen.flightsearch.entities.server.Itinerary;
+import com.arturoguillen.flightsearch.entities.server.Leg;
 import com.arturoguillen.flightsearch.entities.server.Place;
+import com.arturoguillen.flightsearch.entities.server.PricingOption;
 import com.arturoguillen.flightsearch.entities.server.Query;
 import com.arturoguillen.flightsearch.entities.server.Session;
 
@@ -43,9 +46,6 @@ public class SearchModel extends BaseModel {
         this.sessionApi = sessionApi;
     }
 
-    /*TODO : Revisar que con el cambio de esquema a sky todo funciona bien (cambiarlo en postman)
-    *        Añadir todo lo referente a los  vuelos teniendo en cuenta el tema de itineraries, legs y segments
-    *        */
     public Disposable getFlightsInfo(final Search search, DisposableObserver<FlightsResult> observer) {
 
         Observable<Response<Session>> observable = sessionApi.createSession(
@@ -92,11 +92,36 @@ public class SearchModel extends BaseModel {
 
                         flightResult.setNumberOfResults(session.getItineraries().size());
 
-                        List<Flight> flights = new ArrayList<>();
+                        List<Trip> trips = new ArrayList<>();
                         for (Itinerary itinerary : session.getItineraries()) {
-                            setFlight(flights, itinerary);
+                            Leg outboundLeg = getLeg(session.getLegs(), itinerary.getOutboundLegId());
+                            Leg inboundLeg = getLeg(session.getLegs(), itinerary.getInboundLegId());
+
+                            for (PricingOption pricingOption : itinerary.getPricingOptions()) {
+                                Trip trip = new Trip();
+                                trip.setPrice(pricingOption.getPrice());
+                                trip.setOutboundArrivalTime(convertToTime(outboundLeg.getArrival()));
+                                trip.setOutboundDepartureTime(convertToTime(outboundLeg.getDeparture()));
+                                trip.setOutboundCarrierImage(getCarrierImageUrl(session.getCarriers(), outboundLeg.getCarriers()[0]));
+                                trip.setOutboundCarrierName(getCarrierName(session.getCarriers(), outboundLeg.getCarriers()[0]));
+                                trip.setOutboundDestination(getPlaceCode(session.getPlaces(), outboundLeg.getDestinationStation()));
+                                trip.setOutboundDuration(outboundLeg.getDuration());
+                                trip.setOutboundOrigin(getPlaceCode(session.getPlaces(), outboundLeg.getOriginStation()));
+                                trip.setOutboundStops(outboundLeg.getStops().length);
+
+                                trip.setInboundArrivalTime(convertToTime(inboundLeg.getArrival()));
+                                trip.setInboundCarrierImage(getCarrierImageUrl(session.getCarriers(), inboundLeg.getCarriers()[0]));
+                                trip.setInboundCarrierName(getCarrierName(session.getCarriers(), inboundLeg.getCarriers()[0]));
+                                trip.setInboundDepartureTime(convertToTime(inboundLeg.getDeparture()));
+                                trip.setInboundDestination(getPlaceCode(session.getPlaces(), inboundLeg.getDestinationStation()));
+                                trip.setInboundDuration(inboundLeg.getDuration());
+                                trip.setInboundOrigin(getPlaceCode(session.getPlaces(), inboundLeg.getOriginStation()));
+                                trip.setInboundStops(inboundLeg.getStops().length);
+
+                                trips.add(trip);
+                            }
                         }
-                        flightResult.setFligths(flights);
+                        flightResult.setTrips(trips);
 
                         return Observable.just(flightResult);
                     }
@@ -104,8 +129,20 @@ public class SearchModel extends BaseModel {
                 subscribeWith(observer);
     }
 
-    private void setFlight(List<Flight> flights, Itinerary itinerary) {
+    private String getCarrierName(List<Carrier> carriers, int carrierId) {
+        for (Carrier carrier : carriers) {
+            if (carrier.getId() == carrierId)
+                return carrier.getName();
+        }
+        return null;
+    }
 
+    private String getCarrierImageUrl(List<Carrier> carriers, int carrierId) {
+        for (Carrier carrier : carriers) {
+            if (carrier.getId() == carrierId)
+                return carrier.getImageUrl();
+        }
+        return null;
     }
 
     private void setOutBoundDate(FlightsResult flightResult, String outboundDate) {
@@ -136,12 +173,12 @@ public class SearchModel extends BaseModel {
         flightResult.setDestinationPlace(destinationPlace);
     }
 
-    private String convertToDate(String inboundDate) {
+    private String convertToDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date myDate = null;
         try {
-            myDate = dateFormat.parse(inboundDate);
+            myDate = dateFormat.parse(date);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -151,12 +188,47 @@ public class SearchModel extends BaseModel {
         return timeFormat.format(myDate);
     }
 
+    private String convertToTime(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+        Date myDate = null;
+        try {
+            myDate = dateFormat.parse(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        return timeFormat.format(myDate);
+    }
+
     private
     @Nullable
     String getPlaceName(List<Place> places, int placeId) {
         for (Place place : places) {
             if (place.getId() == placeId)
                 return place.getName();
+        }
+        return null;
+    }
+
+    private
+    @Nullable
+    String getPlaceCode(List<Place> places, int placeId) {
+        for (Place place : places) {
+            if (place.getId() == placeId)
+                return place.getCode();
+        }
+        return null;
+    }
+
+    private
+    @Nullable
+    Leg getLeg(List<Leg> legs, String legId) {
+        for (Leg leg : legs) {
+            if (leg.getId().equals(legId))
+                return leg;
         }
         return null;
     }

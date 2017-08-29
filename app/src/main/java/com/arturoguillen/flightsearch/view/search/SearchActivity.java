@@ -39,7 +39,7 @@ public class SearchActivity extends InjectedActivity {
         searchModel.getFlightsInfo(search, new DisposableObserver<FlightsResult>() {
             @Override
             public void onNext(FlightsResult flightsResult) {
-                Log.i("MIERDA", flightsResult.getFligths().toString());
+                Log.i("MIERDA", flightsResult.toString());
             }
 
             @Override

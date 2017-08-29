@@ -3,10 +3,10 @@ package com.arturoguillen.flightsearch.entities.server;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by agl on 28/08/2017.
+ * Created by arturo.guillen on 29/08/2017.
  */
 
-public class Place {
+public class Carrier {
 
     @SerializedName("Id")
     private int id;
@@ -14,8 +14,8 @@ public class Place {
     @SerializedName("Name")
     private String name;
 
-    @SerializedName("Code")
-    private String code;
+    @SerializedName("ImageUrl")
+    private String imageUrl;
 
     public int getId() {
         return id;
@@ -25,7 +25,7 @@ public class Place {
         return name;
     }
 
-    public String getCode() {
-        return code;
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
