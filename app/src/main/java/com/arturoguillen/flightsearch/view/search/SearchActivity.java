@@ -79,11 +79,14 @@ public class SearchActivity extends InjectedActivity implements SearchView, Adap
                 R.array.airports_array, android.R.layout.simple_spinner_item);
         adapterDestination.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spDestination.setAdapter(adapterDestination);
-
+        spDestination.setSelection(0);
+        destination = String.valueOf(adapterDestination.getItem(0));
         ArrayAdapter<CharSequence> adapterOrigin = ArrayAdapter.createFromResource(this,
                 R.array.airports_array, android.R.layout.simple_spinner_item);
         adapterOrigin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spOrigin.setAdapter(adapterOrigin);
+        spOrigin.setSelection(1);
+        origin = String.valueOf(adapterOrigin.getItem(1));
 
     }
 
@@ -108,14 +111,15 @@ public class SearchActivity extends InjectedActivity implements SearchView, Adap
             Search search = new Search();
             search.setOriginPlace(origin);
             search.setDestinationPlace(destination);
-            search.setOutboundDate("2017-10-30");
-            search.setInbounddate("2017-11-15");
+            search.setOutboundDate(String.valueOf(outbound.getText()));
+            search.setInbounddate(String.valueOf(inbound.getText()));
             search.setAdults(Integer.parseInt(String.valueOf(adults.getText())));
             search.setChildren(Integer.parseInt(String.valueOf(children.getText())));
             search.setInfants(Integer.parseInt(String.valueOf(infants.getText())));
 
             presenter.search(search);
         }
+
     }
 
     @OnClick(R.id.et_outbound)
@@ -170,7 +174,6 @@ public class SearchActivity extends InjectedActivity implements SearchView, Adap
     public void goToResultActivity(FlightsResult flightsResult) {
         startActivity(ResultActivity.createIntent(SearchActivity.this, flightsResult));
     }
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
