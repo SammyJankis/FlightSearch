@@ -1,5 +1,7 @@
 package com.arturoguillen.flightsearch.di.module;
 
+import android.app.Application;
+
 import com.arturoguillen.flightsearch.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,6 +13,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -27,8 +30,17 @@ public class NetModule {
 
     private static final long TIMEOUT = 30;
 
-    public NetModule() {
+    Application application;
+
+    public NetModule(Application application) {
+        this.application = application;
         baseurl = Constants.BASE_URL;
+    }
+
+    @Provides
+    @Singleton
+    Application providesApplication() {
+        return application;
     }
 
     @Provides
@@ -49,12 +61,20 @@ public class NetModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-        clientBuilder.addInterceptor(httpLoggingInterceptor);
-        clientBuilder.connectTimeout(TIMEOUT, TimeUnit.SECONDS);
-        clientBuilder.readTimeout(TIMEOUT, TimeUnit.SECONDS);
-        return clientBuilder.build();
+    Cache provideOkHttpCache(Application application) {
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        return new Cache(application.getCacheDir(), cacheSize);
+    }
+
+    @Provides
+    @Singleton
+    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, Cache cache) {
+        return new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .cache(cache)
+                .build();
     }
 
     @Provides
