@@ -58,4 +58,24 @@ public class FlightsResult implements Serializable {
     public void setNumberOfResults(int numberOfResults) {
         this.numberOfResults = numberOfResults;
     }
+
+    public String getOriginPlace() {
+        return originPlace;
+    }
+
+    public String getDestinationPlace() {
+        return destinationPlace;
+    }
+
+    public String getOutboundDate() {
+        return outboundDate;
+    }
+
+    public String getInboundDate() {
+        return inboundDate;
+    }
+
+    public int getNumberOfResults() {
+        return numberOfResults;
+    }
 }
