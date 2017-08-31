@@ -2,6 +2,11 @@
     <string name="app_name">FlightSearch</string>
     <string name="click_try_again">Click here to try again</string>
     <string name="search">Search</string>
+    <string name="to">to</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="of">of</string>
+    <string name="results_shown">results shown</string>
 
     <string-array name="airports_array">
         <item>EDI</item>
