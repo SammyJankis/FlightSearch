@@ -2,68 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_low"
+    android:layout_margin="@dimen/material_screen_edge"
     android:orientation="vertical">
 
     <Spinner
         android:id="@+id/sp_origin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med" />
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas" />
 
     <Spinner
         android:id="@+id/sp_destination"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med" />
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas" />
 
     <EditText
         android:id="@+id/et_outbound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med"
-        android:clickable="true" />
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas"
+        android:clickable="true"
+        android:text="2017-10-10" />
 
     <EditText
         android:id="@+id/et_inbound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med"
-        android:clickable="true" />
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas"
+        android:clickable="true"
+        android:text="2017-11-10" />
 
     <EditText
         android:id="@+id/et_adults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med"
-        android:inputType="number" />
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas"
+        android:inputType="number"
+        android:text="1" />
 
     <EditText
         android:id="@+id/et_children"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med"
-        android:inputType="number" />
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas"
+        android:inputType="number"
+        android:text="0" />
 
     <EditText
         android:id="@+id/et_infants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med"
-        android:inputType="number" />
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas"
+        android:inputType="number"
+        android:text="0" />
 
     <Button
         android:id="@+id/btn_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_med"
-        android:layout_marginTop="@dimen/margin_med"
+        android:layout_marginBottom="@dimen/material_space_between_content_areas"
+        android:layout_marginTop="@dimen/material_space_between_content_areas"
         android:text="@string/search" />
 </LinearLayout>
