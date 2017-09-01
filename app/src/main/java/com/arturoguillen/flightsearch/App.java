@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.arturoguillen.flightsearch.di.component.DaggerFlightComponent;
 import com.arturoguillen.flightsearch.di.component.FlightComponent;
+import com.arturoguillen.flightsearch.di.module.ImageRequestModule;
 import com.arturoguillen.flightsearch.di.module.SearchModule;
 
 /**
@@ -23,6 +24,7 @@ public class App extends Application {
     protected FlightComponent createComponent() {
         return DaggerFlightComponent.builder()
                 .searchModule(new SearchModule(this))
+                .imageRequestModule(new ImageRequestModule(this))
                 .build();
 
     }
