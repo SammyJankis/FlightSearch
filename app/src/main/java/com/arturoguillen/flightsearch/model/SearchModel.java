@@ -64,69 +64,76 @@ public class SearchModel extends BaseModel {
                 apiKey
         );
 
-
         return observable.
                 compose(this.<Response<Session>>applySchedulers()).
                 concatMap(new Function<Response<Session>, ObservableSource<Session>>() {
                     @Override
                     public ObservableSource<Session> apply(Response<Session> sessionResponse) throws Exception {
-
-                        String location = sessionResponse.headers().get("location");
-                        String sessionKey = location.replace("http://partners.api.skyscanner.net/apiservices/pricing/uk2/v1.0/", "");
-                        return sessionApi.pollSession(sessionKey, apiKey).subscribeOn(Schedulers.io())
+                        return sessionApi
+                                .pollSession(parseLocationFromResponse(sessionResponse), apiKey)
+                                .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread());
                     }
                 }).
                 flatMap(new Function<Session, ObservableSource<FlightsResult>>() {
                     @Override
                     public ObservableSource<FlightsResult> apply(Session session) throws Exception {
-                        FlightsResult flightResult = new FlightsResult();
-
-                        setDestinationInfo(flightResult, session);
-
-                        setOriginInfo(flightResult, session);
-
-                        setInBoundDate(flightResult, session.getQuery().getInboundDate());
-
-                        setOutBoundDate(flightResult, session.getQuery().getOutboundDate());
-
-                        flightResult.setNumberOfResults(session.getItineraries().size());
-
-                        List<Trip> trips = new ArrayList<>();
-                        for (Itinerary itinerary : session.getItineraries()) {
-                            Leg outboundLeg = getLeg(session.getLegs(), itinerary.getOutboundLegId());
-                            Leg inboundLeg = getLeg(session.getLegs(), itinerary.getInboundLegId());
-
-                            for (PricingOption pricingOption : itinerary.getPricingOptions()) {
-                                Trip trip = new Trip();
-                                trip.setPrice(pricingOption.getPrice());
-                                trip.setOutboundArrivalTime(convertToTime(outboundLeg.getArrival()));
-                                trip.setOutboundDepartureTime(convertToTime(outboundLeg.getDeparture()));
-                                trip.setOutboundCarrierImage(getCarrierImageUrl(session.getCarriers(), outboundLeg.getCarriers()[0]));
-                                trip.setOutboundCarrierName(getCarrierName(session.getCarriers(), outboundLeg.getCarriers()[0]));
-                                trip.setOutboundDestination(getPlaceCode(session.getPlaces(), outboundLeg.getDestinationStation()));
-                                trip.setOutboundDuration(outboundLeg.getDuration());
-                                trip.setOutboundOrigin(getPlaceCode(session.getPlaces(), outboundLeg.getOriginStation()));
-                                trip.setOutboundStops(outboundLeg.getStops().length);
-
-                                trip.setInboundArrivalTime(convertToTime(inboundLeg.getArrival()));
-                                trip.setInboundCarrierImage(getCarrierImageUrl(session.getCarriers(), inboundLeg.getCarriers()[0]));
-                                trip.setInboundCarrierName(getCarrierName(session.getCarriers(), inboundLeg.getCarriers()[0]));
-                                trip.setInboundDepartureTime(convertToTime(inboundLeg.getDeparture()));
-                                trip.setInboundDestination(getPlaceCode(session.getPlaces(), inboundLeg.getDestinationStation()));
-                                trip.setInboundDuration(inboundLeg.getDuration());
-                                trip.setInboundOrigin(getPlaceCode(session.getPlaces(), inboundLeg.getOriginStation()));
-                                trip.setInboundStops(inboundLeg.getStops().length);
-
-                                trips.add(trip);
-                            }
-                        }
-                        flightResult.setTrips(trips);
-
-                        return Observable.just(flightResult);
+                        return Observable.just(parseFlightResultFromSession(session));
                     }
                 }).
                 subscribeWith(observer);
+    }
+
+    private String parseLocationFromResponse(Response<Session> sessionResponse) {
+        String location = sessionResponse.headers().get("location");
+        return location.replace("http://partners.api.skyscanner.net/apiservices/pricing/uk2/v1.0/", "");
+    }
+
+    private FlightsResult parseFlightResultFromSession(Session session) {
+        FlightsResult flightResult = new FlightsResult();
+
+        setDestinationInfo(flightResult, session);
+
+        setOriginInfo(flightResult, session);
+
+        setInBoundDate(flightResult, session.getQuery().getInboundDate());
+
+        setOutBoundDate(flightResult, session.getQuery().getOutboundDate());
+
+        flightResult.setNumberOfResults(session.getItineraries().size());
+
+        List<Trip> trips = new ArrayList<>();
+        for (Itinerary itinerary : session.getItineraries()) {
+            Leg outboundLeg = getLeg(session.getLegs(), itinerary.getOutboundLegId());
+            Leg inboundLeg = getLeg(session.getLegs(), itinerary.getInboundLegId());
+
+            for (PricingOption pricingOption : itinerary.getPricingOptions()) {
+                Trip trip = new Trip();
+                trip.setPrice(pricingOption.getPrice());
+                trip.setOutboundArrivalTime(convertToTime(outboundLeg.getArrival()));
+                trip.setOutboundDepartureTime(convertToTime(outboundLeg.getDeparture()));
+                trip.setOutboundCarrierImage(getCarrierImageUrl(session.getCarriers(), outboundLeg.getCarriers()[0]));
+                trip.setOutboundCarrierName(getCarrierName(session.getCarriers(), outboundLeg.getCarriers()[0]));
+                trip.setOutboundDestination(getPlaceCode(session.getPlaces(), outboundLeg.getDestinationStation()));
+                trip.setOutboundDuration(outboundLeg.getDuration());
+                trip.setOutboundOrigin(getPlaceCode(session.getPlaces(), outboundLeg.getOriginStation()));
+                trip.setOutboundStops(outboundLeg.getStops().length);
+
+                trip.setInboundArrivalTime(convertToTime(inboundLeg.getArrival()));
+                trip.setInboundCarrierImage(getCarrierImageUrl(session.getCarriers(), inboundLeg.getCarriers()[0]));
+                trip.setInboundCarrierName(getCarrierName(session.getCarriers(), inboundLeg.getCarriers()[0]));
+                trip.setInboundDepartureTime(convertToTime(inboundLeg.getDeparture()));
+                trip.setInboundDestination(getPlaceCode(session.getPlaces(), inboundLeg.getDestinationStation()));
+                trip.setInboundDuration(inboundLeg.getDuration());
+                trip.setInboundOrigin(getPlaceCode(session.getPlaces(), inboundLeg.getOriginStation()));
+                trip.setInboundStops(inboundLeg.getStops().length);
+
+                trips.add(trip);
+            }
+        }
+        flightResult.setTrips(trips);
+
+        return flightResult;
     }
 
     private String getCarrierName(List<Carrier> carriers, int carrierId) {
