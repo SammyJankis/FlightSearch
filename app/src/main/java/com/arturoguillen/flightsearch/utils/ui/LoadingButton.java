@@ -70,4 +70,8 @@ public class LoadingButton extends LinearLayout {
         progressBar.setVisibility(GONE);
     }
 
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener l) {
+        button.setOnClickListener(l);
+    }
 }

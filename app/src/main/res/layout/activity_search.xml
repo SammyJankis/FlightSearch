@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -149,6 +150,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/material_space_between_content_areas"
             android:layout_marginTop="@dimen/material_space_between_content_areas"
-            android:text="@string/search" />
+            app:text="@string/search" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

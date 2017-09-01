@@ -99,6 +99,13 @@ public class SearchActivity extends InjectedActivity implements SearchView, Adap
         spOrigin.setAdapter(adapterOrigin);
         spOrigin.setSelection(1);
         origin = String.valueOf(adapterOrigin.getItem(1));
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickBtnSearch();
+            }
+        });
     }
 
     @Override
@@ -112,14 +119,12 @@ public class SearchActivity extends InjectedActivity implements SearchView, Adap
         component.inject(this);
     }
 
-    @OnClick(R.id.btn_search)
-    public void onClickBtnSearch(View view) {
-
+    private void onClickBtnSearch() {
         if (TextUtils.isEmpty(destination)) {
             showErrorInDestination();
         } else if (TextUtils.isEmpty(origin)) {
             showErrorInOrigin();
-        } else if (!destination.equals(origin)) {
+        } else if (destination.equals(origin)) {
             showErrorSameDestinationOrigin();
         } else {
             Search search = new Search();

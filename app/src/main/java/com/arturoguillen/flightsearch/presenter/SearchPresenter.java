@@ -42,6 +42,7 @@ public class SearchPresenter implements PresenterInterface<SearchView> {
 
     public void search(Search search) {
         view.showProgress();
+        view.hideMessage();
         searchDisposable = searchModel.getFlightsInfo(search, new DisposableObserver<FlightsResult>() {
             @Override
             public void onNext(FlightsResult flightsResult) {
