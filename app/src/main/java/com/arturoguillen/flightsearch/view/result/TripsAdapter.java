@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 class TripsAdapter extends RecyclerView.Adapter {
-    
+
     private Picasso picasso;
     private List<Trip> trips;
 

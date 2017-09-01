@@ -57,6 +57,7 @@ public class PicassoView extends LinearLayout {
                 picassoProgress.getViewTreeObserver().removeOnPreDrawListener(this);
                 picasso.load(path)
                         .resize(picassoProgress.getWidth(), picassoProgress.getHeight())
+                        .centerInside()
                         .noFade()
                         .error(R.drawable.noimage)
                         .into(picassoImage, new Callback() {
