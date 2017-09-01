@@ -53,7 +53,7 @@ public class SearchPresenter implements PresenterInterface<SearchView> {
             @Override
             public void onError(Throwable e) {
                 view.hideProgress();
-                view.showMessage(R.string.click_try_again);
+                view.showMessage(R.string.error);
                 LogUtils.DEBUG(TAG, e.getMessage());
             }
 

@@ -1,74 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cl_search"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/material_screen_edge"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/sp_origin"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas" />
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/material_screen_edge"
+        android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/sp_destination"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:text="@string/select_origin"
+            android:textSize="@dimen/material_text_subhead" />
 
-    <EditText
-        android:id="@+id/et_outbound"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas"
-        android:clickable="true"
-        android:text="2017-10-10" />
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/sp_origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas" />
 
-    <EditText
-        android:id="@+id/et_inbound"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas"
-        android:clickable="true"
-        android:text="2017-11-10" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:text="@string/select_destination"
+            android:textSize="@dimen/material_text_subhead" />
 
-    <EditText
-        android:id="@+id/et_adults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas"
-        android:inputType="number"
-        android:text="1" />
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/sp_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas" />
 
-    <EditText
-        android:id="@+id/et_children"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas"
-        android:inputType="number"
-        android:text="0" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:text="@string/outbound_date"
+            android:textSize="@dimen/material_text_subhead" />
 
-    <EditText
-        android:id="@+id/et_infants"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas"
-        android:inputType="number"
-        android:text="0" />
+        <TextView
+            android:id="@+id/et_outbound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:clickable="true"
+            android:text="2017-10-10" />
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_space_between_content_areas"
-        android:layout_marginTop="@dimen/material_space_between_content_areas"
-        android:text="@string/search" />
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:text="@string/inbound_date"
+            android:textSize="@dimen/material_text_subhead" />
+
+        <TextView
+            android:id="@+id/et_inbound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:clickable="true"
+            android:text="2017-11-10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/adults"
+                android:textSize="@dimen/material_text_subhead" />
+
+            <EditText
+                android:id="@+id/et_adults"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/children"
+                android:textSize="@dimen/material_text_subhead" />
+
+            <EditText
+                android:id="@+id/et_children"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/infants"
+                android:textSize="@dimen/material_text_subhead" />
+
+            <EditText
+                android:id="@+id/et_infants"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="0" />
+        </LinearLayout>
+
+        <com.arturoguillen.flightsearch.utils.ui.LoadingButton
+            android:id="@+id/btn_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_space_between_content_areas"
+            android:layout_marginTop="@dimen/material_space_between_content_areas"
+            android:text="@string/search" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

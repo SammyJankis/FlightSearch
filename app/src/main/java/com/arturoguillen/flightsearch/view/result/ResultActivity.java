@@ -38,6 +38,9 @@ public class ResultActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         flightsResult = getFlightResultExtra(savedInstanceState);
 
+        initUIHeader(flightsResult);
+    }
+
     private void initUIHeader(FlightsResult flightsResult) {
         String destOrig = flightsResult.getOriginPlace() + " "
                 + getString(R.string.to) + " " +
@@ -53,7 +56,7 @@ public class ResultActivity extends AppCompatActivity {
                 flightsResult.getNumberOfResults() + " " +
                 getString(R.string.results_shown);
         tvHeaderResults.setText(results);
-    }
+
     }
 
     private FlightsResult getFlightResultExtra(Bundle savedInstanceState) {
