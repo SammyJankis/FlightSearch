@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">FlightSearch</string>
+    <string name="click_try_again">Click here to try again</string>
+    <string name="search">Search</string>
+    <string name="to">to</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="of">of</string>
+    <string name="results_shown">results shown</string>
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="select_origin">Select origin :</string>
+    <string name="select_destination">Select destination :</string>
+    <string name="outbound_date">Outboun date :</string>
+    <string name="inbound_date">Inbound date :</string>
+    <string name="adults">Adults :</string>
+    <string name="infants">Infants :</string>
+    <string name="children">Children :</string>
+    <string name="please_select_destination">Please select a destination</string>
+    <string name="please_select_origin">Please select an origin</string>
+    <string name="please_select_diferent_origin_destination">Please select different origin and destination</string>
+
+    <string-array name="airports_array">
+        <item>EDI</item>
+        <item>LHR</item>
+    </string-array>
 </resources>

@@ -22,7 +22,7 @@ public class App extends Application {
 
     protected FlightComponent createComponent() {
         return DaggerFlightComponent.builder()
-                .searchModule(new SearchModule())
+                .searchModule(new SearchModule(this))
                 .build();
 
     }

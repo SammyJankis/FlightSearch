@@ -11,6 +11,7 @@ import com.arturoguillen.flightsearch.di.component.FlightComponent;
  */
 
 public abstract class InjectedActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
