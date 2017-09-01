@@ -111,4 +111,72 @@ public class Trip implements Serializable {
     public void setInboundCarrierImage(String inboundCarrierImage) {
         this.inboundCarrierImage = inboundCarrierImage;
     }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public String getOutboundOrigin() {
+        return outboundOrigin;
+    }
+
+    public String getOutboundDestination() {
+        return outboundDestination;
+    }
+
+    public String getOutboundDepartureTime() {
+        return outboundDepartureTime;
+    }
+
+    public String getOutboundArrivalTime() {
+        return outboundArrivalTime;
+    }
+
+    public int getOutboundStops() {
+        return outboundStops;
+    }
+
+    public int getOutboundDuration() {
+        return outboundDuration;
+    }
+
+    public String getOutboundCarrierName() {
+        return outboundCarrierName;
+    }
+
+    public String getOutboundCarrierImage() {
+        return outboundCarrierImage;
+    }
+
+    public String getInboundOrigin() {
+        return inboundOrigin;
+    }
+
+    public String getInboundDestination() {
+        return inboundDestination;
+    }
+
+    public String getInboundDepartureTime() {
+        return inboundDepartureTime;
+    }
+
+    public String getInboundArrivalTime() {
+        return inboundArrivalTime;
+    }
+
+    public int getInboundStops() {
+        return inboundStops;
+    }
+
+    public int getInboundDuration() {
+        return inboundDuration;
+    }
+
+    public String getInboundCarrierName() {
+        return inboundCarrierName;
+    }
+
+    public String getInboundCarrierImage() {
+        return inboundCarrierImage;
+    }
 }

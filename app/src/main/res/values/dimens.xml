@@ -18,5 +18,8 @@
     <dimen name="material_text_display3">56sp</dimen>
     <dimen name="material_text_display4">112sp</dimen>
 
+    <dimen name="card_corner_radius">0dp</dimen>
+    <dimen name="card_elevation">3dp</dimen>
+
 
 </resources>
