@@ -78,4 +78,8 @@ public class FlightsResult implements Serializable {
     public int getNumberOfResults() {
         return numberOfResults;
     }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
 }
